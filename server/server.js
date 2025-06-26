@@ -12,25 +12,8 @@ let server = http.createServer(app); //creo servidor http y le paso app como "ma
 app.use(express.static(path.join(__dirname, 'public')));
 const port = process.env.PORT || 3000; //defino el puerto en el que va a correr la app.
 
-let io = socketIO(server); //creo una instancia de socket.io y le paso el servidor http que acabo de crear.
-
-io.on('connection', (client) =>{ //cuando un cliente se conecte a este srvidor websocket ejecuta esta funcion.
-    console.log("User connected");
-
-    client.emit('welcome',{
-        user: 'Admin',
-        message: 'Welcome to the server!' 
-    }); 
-
-    client.on('disconnect', () => { 
-        console.log("User disconnected");
-    });
-
-    
-    client.on('sendmessage', (message)=>{
-        console.log(message); //cuando el cliente envie un mensaje, lo imprimo en la consola del servidor.
-    });
-})
+module.exports.io = socketIO(server); //creo una instancia de socket.io y le paso el servidor http que acabo de crear.
+require('./sockets'); //importo el archivo sockets.js que contiene la logica de socket.io.
 
 server.listen(port, (err) => { //le digo a la app que escuche en el puerto definido.
 
