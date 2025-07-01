@@ -1,15 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSocket Example</title>
+    <title>Simulador de WebSocket y Webhook</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .webhook-section {
+            background-color: #f0f8ff;
+        }
+
+        .websocket-section {
+            background-color: #f0fff0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .log {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to WebSocket Example</h1>
-    <p>This is a basic HTML file for your WebSocket project.</p>
+    <h1>🔌 Simulador de WebSocket y Webhook</h1>
+
+    <div class="section websocket-section">
+        <h2>🔗 Conexión WebSocket</h2>
+        <p>Estado: <span id="estado-ws">Conectando...</span></p>
+        <button onclick="enviarMensajeWebSocket()">Enviar Mensaje WebSocket</button>
+        <div id="log-ws" class="log">Los mensajes de WebSocket aparecerán aquí...</div>
+    </div>
+
+    <div class="section webhook-section">
+        <h2>🎯 Simulador de Webhook</h2>
+        <p>Probar funcionalidad de webhook:</p>
+        <input type="text" id="datos-webhook" placeholder="Ingresa datos del webhook (JSON)"
+            value='{"evento": "prueba", "usuario": "demo"}'>
+        <br>
+        <button onclick="simularWebhook()">Simular Webhook</button>
+        <button onclick="enviarWebhookReal()">Enviar Webhook Real</button>
+        <div id="log-webhook" class="log">Los mensajes de webhook aparecerán aquí...</div>
+    </div>
 
     <script src="socket.io/socket.io.js"></script>
     <script src="socket-custom.js"></script>
 </body>
-</html>     
+
+</html>
